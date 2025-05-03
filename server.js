@@ -22,7 +22,9 @@ app.use(express.static('public'));
 
 // Setup nodemailer with secure Gmail settings
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  host: 'smtp.gmail.com',
+  port: 465,           // Use 465 for SSL
+  secure: true,        // True for 465, false for 587
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
@@ -97,6 +99,7 @@ app.post('/contact', (req, res) => {
 });
 
 // Start the server
-app.listen(3000, () => {
-  console.log('Server running at http://localhost:3000');
+const PORT = process.env.PORT || 3000;  // Use Render's environment variable for port
+app.listen(PORT, () => {
+  console.log(`Server running at http://localhost:${PORT}`);
 });
