@@ -1,3 +1,4 @@
+require('dotenv').config(); // This will load the environment variables
 const express = require('express');
 const multer = require('multer');
 const nodemailer = require('nodemailer');
@@ -23,8 +24,8 @@ app.use(express.static('public'));
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'je161892@gmail.com',
-    pass: 'qkyeirzlmjmhifgc' // Use your Gmail app password here
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS
   }
 });
 
