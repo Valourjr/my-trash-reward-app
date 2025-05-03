@@ -1,0 +1,203 @@
+body {
+    margin: 0;
+    font-family: 'Orbitron', sans-serif;
+    background: radial-gradient(ellipse at center, #0d0f1a 0%, #000 100%);
+    color: #00f7ff;
+    overflow-x: hidden;
+  }
+  
+  /* Navbar */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #111;
+    padding: 10px 20px;
+    border-bottom: 2px solid #00f7ff;
+    box-shadow: 0 0 10px #00f7ff;
+  }
+  
+  .navbar-brand a {
+    color: #00f7ff;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-shadow: 0 0 8px #00f7ff;
+  }
+  
+  .hamburger-button {
+    font-size: 2rem;
+    color: #00f7ff;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .hamburger-links {
+    display: none;
+    background: #111;
+    padding: 10px;
+    position: absolute;
+    top: 60px;
+    right: 10px;
+    border: 1px solid #00f7ff;
+    box-shadow: 0 0 8px #00f7ff;
+    z-index: 999;
+  }
+  
+  .hamburger-links.show {
+    display: block;
+  }
+  
+  .hamburger-links ul,
+  .desktop-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .hamburger-links li,
+  .desktop-menu li {
+    margin: 10px 0;
+  }
+  
+  .hamburger-links a,
+  .desktop-menu a {
+    color: #00f7ff;
+    text-decoration: none;
+    font-weight: bold;
+    text-shadow: 0 0 5px #00f7ff;
+  }
+  
+  .desktop-menu ul {
+    display: flex;
+    gap: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    .desktop-menu {
+      display: none;
+    }
+  }
+  
+  /* Leaderboard */
+  .leaderboard-container {
+    text-align: center;
+    padding: 40px 20px;
+  }
+  
+  .page-title {
+    font-size: 3rem;
+    color: #00f7ff;
+    text-shadow: 0 0 10px #00f7ff;
+    margin-bottom: 10px;
+  }
+  
+  .sub-title {
+    font-size: 1.2rem;
+    color: #fff;
+    margin-bottom: 40px;
+  }
+  
+  .leaderboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .winner-card {
+    background: rgba(0, 247, 255, 0.1);
+    border: 2px solid #00f7ff;
+    border-radius: 12px;
+    width: 80%;
+    max-width: 500px;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    box-shadow: 0 0 12px #00f7ff;
+    transition: transform 0.3s;
+  }
+  
+  .winner-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .top-winner {
+    background: linear-gradient(135deg, #00f7ff, #ff007f);
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  .rank {
+    font-size: 1.5rem;
+  }
+  
+  .nickname {
+    font-size: 1.3rem;
+  }
+  
+  .points {
+    font-size: 1.2rem;
+  }
+
+  @media (max-width: 768px) {
+    /* Navbar adjustments */
+    .navbar {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 10px;
+    }
+  
+    .navbar-brand a {
+      font-size: 1.3rem;
+    }
+  
+    .hamburger-links {
+      width: 100%;
+      right: 0;
+      top: 60px;
+      border: none;
+      box-shadow: none;
+    }
+  
+    .hamburger-links ul {
+      flex-direction: column;
+      width: 100%;
+    }
+  
+    .hamburger-links li {
+      margin: 5px 0;
+      padding-left: 10px;
+    }
+  
+    .desktop-menu {
+      display: none;
+    }
+  
+    /* Leaderboard */
+    .page-title {
+      font-size: 2rem;
+      margin-bottom: 5px;
+    }
+  
+    .sub-title {
+      font-size: 1rem;
+      margin-bottom: 20px;
+    }
+  
+    .winner-card {
+      width: 95%;
+      flex-direction: column;
+      text-align: center;
+      gap: 8px;
+    }
+  
+    .rank,
+    .nickname,
+    .points {
+      font-size: 1.1rem;
+    }
+  }

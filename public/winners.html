@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Weekly Winners</title>
+  <link rel="stylesheet" href="winners.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="navbar-brand">
+      <a href="index.html">Trash Champs</a>
+    </div>
+    <div class="hamburger-menu">
+      <button class="hamburger-button" onclick="toggleMenu()">&#9776;</button>
+      <div class="hamburger-links" id="hamburger-links">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+         <!--  <li><a href="winners.html">Weekly Winners</a></li>-->
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <!-- 
+    <div class="desktop-menu">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="winners.html">Weekly Winners</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>-->
+  </header>
+
+  <main class="leaderboard-container">
+    <h1 class="page-title">WEEKLY CHAMPIONS</h1>
+    <p class="sub-title">Futuristic Trash Heroes of the Week</p>
+
+    <div class="leaderboard">
+      <div class="winner-card top-winner">
+        <span class="rank">#1</span>
+        <span class="nickname">StarClean007</span>
+        <span class="points">9800 pts</span>
+      </div>
+      <div class="winner-card">
+        <span class="rank">#2</span>
+        <span class="nickname">TrashSlayer</span>
+        <span class="points">8700 pts</span>
+      </div>
+      <div class="winner-card">
+        <span class="rank">#3</span>
+        <span class="nickname">EcoKnight</span>
+        <span class="points">8500 pts</span>
+      </div>
+      <!-- Add more nicknames here -->
+    </div>
+  </main>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("hamburger-links");
+      menu.classList.toggle("show");
+    }
+  </script>
+</body>
+</html>

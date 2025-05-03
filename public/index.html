@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trash Submission</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="navbar-brand">
+                <a href="index.html">My Trash Reward App</a>
+            </div>
+
+            <!-- Hamburger Menu for Mobile -->
+            <div class="hamburger-menu">
+                <button class="hamburger-button" onclick="toggleMenu()">
+                    &#9776; <!-- Hamburger icon -->
+                </button>
+
+                <div class="hamburger-links" id="hamburger-links">
+                    <ul>
+                        <!-- <li><a href="index.html">Home</a></li> -->
+                        <li><a href="winners.html">Weekly Winners</a></li> <!-- Add Weekly Winners link -->
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Menu for larger screens (optional) -->
+            <!--<div class="desktop-menu">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="winners.html">Weekly Winners</a></li> Add Weekly Winners link 
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>-->
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="form-container">
+            <h1 class="title">Dispose & Earn!</h1>
+            <p class="description">Submit your account number and a photo of your trash in the bin to get paid!</p>
+
+            <form action="/submit" method="POST" enctype="multipart/form-data">
+                <input type="text" id="nickname" name="nickname" placeholder="Enter Your Nickname" required>
+                <input type="text" id="account-number" name="account-number" placeholder="Enter Your Account Number" required>
+                <input type="file" id="trash-photo" name="trash-photo" accept="image/*" required>
+                <button type="submit" class="submit-btn">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
