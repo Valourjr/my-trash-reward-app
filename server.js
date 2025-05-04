@@ -83,10 +83,11 @@ app.post('/contact', (req, res) => {
   }
 
   const mailOptions = {
-    from: `${name} <${email}>`,
-    to: `je161892@gmail.com`,  // Replace with your email address
+    from: process.env.EMAIL_USER,
+    to: `je161892@gmail.com`,  //  with your email address
     subject: `New Contact Message from ${name}`,
-    text: `Name: ${name}\nEmail: ${email}\nMessage:\n${message}`
+    text: `Name: ${name}\nEmail: ${email}\nMessage:\n${message}`,
+    replyTo:email
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
