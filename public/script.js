@@ -1,22 +1,24 @@
 // JavaScript to toggle the hamburger menu on mobile
 function toggleMenu() {
-    const menu = document.getElementById("hamburger-links");
-    const body = document.body;  // Get the body element
-    menu.classList.toggle("show");
+  const menu = document.getElementById("hamburger-links");
+  const body = document.body;  // Get the body element
+  menu.classList.toggle("show");
 
-    // Toggle the padding for the body when the menu is open
-    body.classList.toggle("menu-open", menu.classList.contains("show"));
+  // Toggle the padding for the body when the menu is open
+  body.classList.toggle("menu-open", menu.classList.contains("show"));
 }
+
+// Add event listener for the hamburger button click
+document.querySelector('.hamburger-button').addEventListener('click', toggleMenu);
 
 // Add more interactive effects if needed in the future
 document.querySelector('.submit-btn').addEventListener('mouseover', function() {
-    this.style.transform = 'scale(1.1)';
+  this.style.transform = 'scale(1.1)';
 });
 
 document.querySelector('.submit-btn').addEventListener('mouseout', function() {
-    this.style.transform = 'scale(1)';
+  this.style.transform = 'scale(1)';
 });
-
 
 let startX = 0;
 
