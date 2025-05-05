@@ -1,4 +1,4 @@
-require('dotenv').config(); // This will load the environment variables
+require('dotenv').config(); // Load environment variables
 const express = require('express');
 const multer = require('multer');
 const nodemailer = require('nodemailer');
@@ -7,44 +7,61 @@ const fs = require('fs');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
+// Security packages
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
+const xssClean = require('xss-clean');
+
 const app = express();
 
-// Set up multer for file upload (for the main form)
+// Set up multer for file upload
 const upload = multer({ dest: 'public/uploads/' });
 
-// Middleware to parse JSON bodies and enable CORS
+// Middleware
+app.use(helmet()); // Add security headers
+app.use(xssClean()); // Prevent XSS
+app.use(
+  rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100,
+    message: 'Too many requests from this IP, please try again later.'
+  })
+);
 app.use(bodyParser.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
-// Serve the static HTML and files (for both forms)
+// Serve static files
 app.use(express.static('public'));
 
-// Setup nodemailer with secure Gmail settings
+// Nodemailer setup
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
-  port: 465,           // Use 465 for SSL
-  secure: true,        // True for 465, false for 587
+  port: 465,
+  secure: true,
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
   }
 });
 
-// Route: Serve the form (main form and contact form)
+// Routes
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Route: Handle main form submission with file upload
 app.post('/submit', upload.single('trash-photo'), (req, res) => {
   const accountNumber = req.body['account-number'];
   const nickname = req.body['nickname'];
   const photoPath = req.file ? req.file.path : null;
 
-  // Basic validation for the form
+  // Server-side validation
   if (!nickname || nickname.trim() === '') {
     return res.status(400).send('Nickname is required.');
+  }
+
+  if (!accountNumber || accountNumber.trim() === '') {
+    return res.status(400).send('Account number is required.');
   }
 
   if (!photoPath) {
@@ -52,8 +69,8 @@ app.post('/submit', upload.single('trash-photo'), (req, res) => {
   }
 
   const mailOptions = {
-    from: `je161892@gmail.com`,
-    to: `je161892@gmail.com`,
+    from: process.env.EMAIL_USER,
+    to: process.env.EMAIL_USER,
     subject: `Trash Submission Received`,
     text: `New trash submission:\nNickname: ${nickname}\nAccount Number: ${accountNumber}`,
     attachments: [
@@ -69,12 +86,11 @@ app.post('/submit', upload.single('trash-photo'), (req, res) => {
       console.error('Email Error:', error);
       return res.status(500).send('Error sending email.');
     }
-    fs.unlinkSync(photoPath); // Delete file after sending
+    fs.unlinkSync(photoPath);
     res.send('Submission received! Thank you.');
   });
 });
 
-// Route: Handle contact form submission (without file upload)
 app.post('/contact', (req, res) => {
   const { name, email, message } = req.body;
 
@@ -84,10 +100,10 @@ app.post('/contact', (req, res) => {
 
   const mailOptions = {
     from: process.env.EMAIL_USER,
-    to: `je161892@gmail.com`,  //  with your email address
+    to: process.env.EMAIL_USER,
     subject: `New Contact Message from ${name}`,
     text: `Name: ${name}\nEmail: ${email}\nMessage:\n${message}`,
-    replyTo:email
+    replyTo: email
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
@@ -99,8 +115,7 @@ app.post('/contact', (req, res) => {
   });
 });
 
-// Start the server
-const PORT = process.env.PORT || 3000;  // Use Render's environment variable for port
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });
